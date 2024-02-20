@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\INTUS.SalesManager.Common\INTUS.SalesManager.Common.csproj" />
+  </ItemGroup>
+
 </Project>
