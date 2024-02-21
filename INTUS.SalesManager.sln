@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "INTUS.SalesManager.Api.Web", "src\Api\INTUS.SalesManager.Api.Web\INTUS.SalesManager.Api.Web.csproj", "{4FE03A38-70C3-4124-B0CB-DF45408D7008}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "INTUS.SalesManager.Client", "src\Client\INTUS.SalesManager.Client\INTUS.SalesManager.Client.csproj", "{70E08EDB-4814-4702-98E6-88B6080D07C7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4FE03A38-70C3-4124-B0CB-DF45408D7008} = {4FE03A38-70C3-4124-B0CB-DF45408D7008}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AE4349E5-3B95-4DC4-AFFA-95993EB7D7F9}"
 EndProject
@@ -23,17 +26,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Insfratructure", "Insfratru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{DF3EB9C5-71A8-4F3B-ACD9-3804D618FFBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INTUS.SalesManager.Application", "src\Application\INTUS.SalesManager.Application\INTUS.SalesManager.Application.csproj", "{7C0367F9-C42D-4B97-BB42-BB0D51CAC453}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "INTUS.SalesManager.Application", "src\Application\INTUS.SalesManager.Application\INTUS.SalesManager.Application.csproj", "{7C0367F9-C42D-4B97-BB42-BB0D51CAC453}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INTUS.SalesManager.Domain.Services", "src\Domain\INTUS.SalesManager.Domain.Services\INTUS.SalesManager.Domain.Services.csproj", "{9842B59B-94F0-44B3-ADFB-1E5B7E8381DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "INTUS.SalesManager.Domain.Services", "src\Domain\INTUS.SalesManager.Domain.Services\INTUS.SalesManager.Domain.Services.csproj", "{9842B59B-94F0-44B3-ADFB-1E5B7E8381DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INTUS.SalesManager.Domain.Models", "src\Domain\INTUS.SalesManager.Domain.Models\INTUS.SalesManager.Domain.Models.csproj", "{22741E1C-D695-4E73-A8D0-DBB36183A6D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "INTUS.SalesManager.Domain.Models", "src\Domain\INTUS.SalesManager.Domain.Models\INTUS.SalesManager.Domain.Models.csproj", "{22741E1C-D695-4E73-A8D0-DBB36183A6D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INTUS.SalesManager.Infrastructure.DataAccess", "src\Infrastructure\INTUS.SalesManager.Infrastructure.DataAccess\INTUS.SalesManager.Infrastructure.DataAccess.csproj", "{DF3B3631-E347-49B9-AC09-B1D579F13271}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "INTUS.SalesManager.Infrastructure.DataAccess", "src\Infrastructure\INTUS.SalesManager.Infrastructure.DataAccess\INTUS.SalesManager.Infrastructure.DataAccess.csproj", "{DF3B3631-E347-49B9-AC09-B1D579F13271}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INTUS.SalesManager.Infrastructure.Common", "src\Infrastructure\INTUS.SalesManager.Infrastructure.Common\INTUS.SalesManager.Infrastructure.Common.csproj", "{CFE52987-66F3-449F-B30B-2388ADFD698D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "INTUS.SalesManager.Infrastructure.Common", "src\Infrastructure\INTUS.SalesManager.Infrastructure.Common\INTUS.SalesManager.Infrastructure.Common.csproj", "{CFE52987-66F3-449F-B30B-2388ADFD698D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INTUS.SalesManager.Common", "src\Common\INTUS.SalesManager.Common\INTUS.SalesManager.Common.csproj", "{29B4FE26-BDEB-4AD5-8D62-DE5E84E2820B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "INTUS.SalesManager.Common", "src\Common\INTUS.SalesManager.Common\INTUS.SalesManager.Common.csproj", "{29B4FE26-BDEB-4AD5-8D62-DE5E84E2820B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

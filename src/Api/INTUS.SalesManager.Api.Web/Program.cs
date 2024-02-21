@@ -1,3 +1,5 @@
+using INTUS.SalesManager.Api.Web.Components;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -22,5 +24,9 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+
+app.MapRazorComponents<App>()
+    .AddInteractiveWebAssemblyRenderMode()
+    .AddAdditionalAssemblies(typeof(INTUS.SalesManager.Client._Imports).Assembly);
 
 app.Run();
