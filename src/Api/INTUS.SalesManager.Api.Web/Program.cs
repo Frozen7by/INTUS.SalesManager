@@ -1,4 +1,7 @@
 using INTUS.SalesManager.Api.Web.Components;
+using INTUS.SalesManager.Application;
+using INTUS.SalesManager.Domain.Services.Orders;
+using INTUS.SalesManager.Infrastructure.Common;
 using INTUS.SalesManager.Infrastructure.DataAccess;
 
 using Microsoft.EntityFrameworkCore;
@@ -11,9 +14,21 @@ builder.Services.AddDbContext<DbContext, SalesManagerDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddMediatR(it => it.RegisterServicesFromAssemblies(Module.Assembly));
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped(typeof(IOrderService), typeof(OrderService));
+
+var baseAddress = builder.Configuration.GetValue<string>("ApplicationUrl")!;
+builder.Services.AddScoped(_ => new HttpClient
+{
+    BaseAddress = new Uri(baseAddress)
+});
 
 var app = builder.Build();
 
@@ -33,6 +48,9 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+app.MapControllers();
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()

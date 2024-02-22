@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "INTUS.SalesManager.Api.Web", "src\Api\INTUS.SalesManager.Api.Web\INTUS.SalesManager.Api.Web.csproj", "{4FE03A38-70C3-4124-B0CB-DF45408D7008}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "INTUS.SalesManager.Client", "src\Client\INTUS.SalesManager.Client\INTUS.SalesManager.Client.csproj", "{70E08EDB-4814-4702-98E6-88B6080D07C7}"
-	ProjectSection(ProjectDependencies) = postProject
-		{4FE03A38-70C3-4124-B0CB-DF45408D7008} = {4FE03A38-70C3-4124-B0CB-DF45408D7008}
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AE4349E5-3B95-4DC4-AFFA-95993EB7D7F9}"
 EndProject

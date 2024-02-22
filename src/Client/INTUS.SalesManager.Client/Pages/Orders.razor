@@ -1,0 +1,44 @@
+﻿@page "/"
+@page "/orders"
+@using INTUS.SalesManager.Common.Models
+
+<PageTitle>Orders</PageTitle>
+
+<h3>Orders</h3>
+@if (orders == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>State</th>
+                <th>Windows</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in orders)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.Name</td>
+                    <td>@order.State.Text</td>
+                    <td>@order.Windows.Count</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<OrderDto>? orders;
+
+    protected override async Task OnInitializedAsync()
+    {
+        orders = await HttpClient.GetFromJsonAsync<List<OrderDto>>("/api/v1/orders");
+    }
+}

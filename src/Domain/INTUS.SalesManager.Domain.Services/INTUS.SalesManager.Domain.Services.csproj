@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\INTUS.SalesManager.Infrastructure.Common\INTUS.SalesManager.Infrastructure.Common.csproj" />
+    <ProjectReference Include="..\INTUS.SalesManager.Domain.Models\INTUS.SalesManager.Domain.Models.csproj" />
+  </ItemGroup>
+
 </Project>

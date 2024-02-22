@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\INTUS.SalesManager.Common\INTUS.SalesManager.Common.csproj" />
+    <ProjectReference Include="..\..\Domain\INTUS.SalesManager.Domain.Services\INTUS.SalesManager.Domain.Services.csproj" />
+  </ItemGroup>
+
 </Project>
