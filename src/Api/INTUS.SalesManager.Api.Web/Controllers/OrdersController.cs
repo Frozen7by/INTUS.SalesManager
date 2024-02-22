@@ -17,8 +17,14 @@ public class OrdersController : Controller
     }
 
     [HttpGet]
-    public Task<List<OrderDto>> GetOrders()
+    public Task<List<OrderListDto>> GetOrders()
     {
         return _mediator.Send(new GetOrders.Request());
+    }
+
+    [HttpGet("{id}")]
+    public Task<OrderDto> GetOrder([FromRoute] GetOrder.Request request)
+    {
+        return _mediator.Send(request);
     }
 }

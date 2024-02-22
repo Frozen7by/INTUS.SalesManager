@@ -1,0 +1,52 @@
+﻿@page "/orders/{id:long}"
+@using INTUS.SalesManager.Common.Models
+
+<PageTitle>Order</PageTitle>
+
+@if (order == null)
+{
+    <h3>Order</h3>
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h3>Order: @order.Name, @order.State.Text</h3>
+    @foreach (var window in order.Windows)
+    {
+        <p>Window: @window.Name, quantity of windows: @window.Quantity</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Element</th>
+                    <th>Type</th>
+                    <th>Width</th>
+                    <th>Height</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var subElement in window.SubElements)
+                {
+                    <tr>
+                        <td>@subElement.Index</td>
+                        <td>@subElement.ElementType.Text</td>
+                        <td>@subElement.Width</td>
+                        <td>@subElement.Height</td>
+                        <td><a>Edit</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p>Total sub elements: @window.TotalSubElements</p>
+    }
+}
+
+@code {
+    [Parameter] public long Id { get; set; }
+    private OrderDto order;
+
+    protected override async Task OnInitializedAsync()
+    {
+        order = await HttpClient.GetFromJsonAsync<OrderDto>($"/api/v1/orders/{Id}");
+    }
+}

@@ -6,11 +6,11 @@ namespace INTUS.SalesManager.Application.Orders;
 
 public static class GetOrders
 {
-    public class Request : IRequest<List<OrderDto>>
+    public class Request : IRequest<List<OrderListDto>>
     {
     }
 
-    public class Handler : IRequestHandler<Request, List<OrderDto>>
+    public class Handler : IRequestHandler<Request, List<OrderListDto>>
     {
         private readonly IOrderService _orderService;
 
@@ -19,7 +19,7 @@ public static class GetOrders
             _orderService = orderService;
         }
 
-        public Task<List<OrderDto>> Handle(Request request, CancellationToken cancellationToken)
+        public Task<List<OrderListDto>> Handle(Request request, CancellationToken cancellationToken)
         {
             return _orderService.GetOrders(cancellationToken);
         }

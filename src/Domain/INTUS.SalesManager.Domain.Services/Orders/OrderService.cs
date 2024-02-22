@@ -15,9 +15,22 @@ public class OrderService : IOrderService
         _orderRepository = orderRepository;
     }
 
-    public Task<List<OrderDto>> GetOrders(CancellationToken cancellationToken)
+    public Task<List<OrderListDto>> GetOrders(CancellationToken cancellationToken)
     {
         return _orderRepository.GetQueryable()
+            .Select(it => new OrderListDto
+            {
+                Id = it.Id,
+                Name = it.Name,
+                State = it.State.ToLookupDto(),
+                Windows = it.Windows.Count
+            }).ToListAsync(cancellationToken);
+    }
+
+    public Task<OrderDto> GetOrder(long id, CancellationToken cancellationToken)
+    {
+        return _orderRepository.GetQueryable()
+            .Where(it => it.Id == id)
             .Select(it => new OrderDto
             {
                 Id = it.Id,
@@ -39,6 +52,7 @@ public class OrderService : IOrderService
                                 Height = se.Height,
                             }).ToList(),
                     }).ToList()
-            }).ToListAsync(cancellationToken);
+            })
+            .SingleAsync(cancellationToken);
     }
 }

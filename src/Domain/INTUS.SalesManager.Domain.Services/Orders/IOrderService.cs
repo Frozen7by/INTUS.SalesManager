@@ -4,5 +4,7 @@ namespace INTUS.SalesManager.Domain.Services.Orders;
 
 public interface IOrderService
 {
-    Task<List<OrderDto>> GetOrders(CancellationToken cancellationToken);
+    Task<OrderDto> GetOrder(long id, CancellationToken cancellationToken);
+
+    Task<List<OrderListDto>> GetOrders(CancellationToken cancellationToken);
 }

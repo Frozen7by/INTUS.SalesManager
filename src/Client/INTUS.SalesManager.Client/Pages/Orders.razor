@@ -18,6 +18,7 @@ else
                 <th>Name</th>
                 <th>State</th>
                 <th>Windows</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -27,7 +28,8 @@ else
                     <td>@order.Id</td>
                     <td>@order.Name</td>
                     <td>@order.State.Text</td>
-                    <td>@order.Windows.Count</td>
+                    <td>@order.Windows</td>
+                    <td><a href="/orders/@order.Id">View</a></td>
                 </tr>
             }
         </tbody>
@@ -35,10 +37,10 @@ else
 }
 
 @code {
-    private List<OrderDto>? orders;
+    private List<OrderListDto>? orders;
 
     protected override async Task OnInitializedAsync()
     {
-        orders = await HttpClient.GetFromJsonAsync<List<OrderDto>>("/api/v1/orders");
+        orders = await HttpClient.GetFromJsonAsync<List<OrderListDto>>("/api/v1/orders");
     }
 }
