@@ -38,7 +38,7 @@
 
     private bool isEdit;
     private bool loading = false;
-    private SubElementDto updatedElement;
+    private SubElementDto updatedElement = new SubElementDto() { ElementType = new() };
     private List<LookupDto> elementTypes = Array.Empty<LookupDto>().ToList();
 
     protected override async Task OnParametersSetAsync()

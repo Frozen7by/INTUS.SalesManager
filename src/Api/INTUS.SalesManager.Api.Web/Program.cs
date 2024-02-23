@@ -1,4 +1,5 @@
 using INTUS.SalesManager.Api.Web.Components;
+using INTUS.SalesManager.Api.Web.Middleware;
 using INTUS.SalesManager.Application;
 using INTUS.SalesManager.Domain.Services.Lookups;
 using INTUS.SalesManager.Domain.Services.Orders;
@@ -28,6 +29,8 @@ builder.Services.AddMediatR(it => it.RegisterServicesFromAssemblies(Module.Assem
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped(typeof(IOrderService), typeof(OrderService));
 builder.Services.AddScoped(typeof(ILookupService<>), typeof(LookupService<>));
+
+builder.Services.AddTransient<ExceptionHandlingMiddleware>();
 
 var baseAddress = builder.Configuration.GetValue<string>("ApplicationUrl")!;
 builder.Services.AddScoped(_ => new HttpClient
