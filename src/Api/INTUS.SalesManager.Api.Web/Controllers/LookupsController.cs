@@ -52,14 +52,14 @@ public class LookupsController : Controller
         return _mediator.Send(request);
     }
 
-    [HttpDelete("elementTypes")]
-    public Task RemoveType([FromBody] RemoveType.Request request)
+    [HttpDelete("elementTypes/{id}")]
+    public Task RemoveType([FromRoute] RemoveType.Request request)
     {
         return _mediator.Send(request);
     }
 
-    [HttpDelete("states")]
-    public Task RemoveState([FromBody] RemoveState.Request request)
+    [HttpDelete("states/{id}")]
+    public Task RemoveState([FromRoute] RemoveState.Request request)
     {
         return _mediator.Send(request);
     }

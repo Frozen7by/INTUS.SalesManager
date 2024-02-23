@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace INTUS.SalesManager.Domain.Services.Lookups;
 
 public class LookupService<TEntity> : ILookupService<TEntity>
-    where TEntity : BaseLookup
+    where TEntity : BaseLookup, new()
 {
     private readonly IRepository<TEntity> _repository;
 
@@ -25,7 +25,13 @@ public class LookupService<TEntity> : ILookupService<TEntity>
 
     public Task Add(LookupDto lookupDto, CancellationToken cancellationToken)
     {
-        _repository.Add((TEntity)lookupDto.ToBaseLookup());
+        TEntity lookup = new()
+        {
+            Id = lookupDto.Id,
+            Text = lookupDto.Text,
+        };
+
+        _repository.Add(lookup);
         return _repository.SaveChanges(cancellationToken);
     }
 

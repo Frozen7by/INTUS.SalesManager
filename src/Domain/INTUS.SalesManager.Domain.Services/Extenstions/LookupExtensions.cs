@@ -14,9 +14,10 @@ public static class LookupExtensions
         };
     }
 
-    public static BaseLookup ToBaseLookup(this LookupDto lookup)
+    public static TLookup ToBaseLookup<TLookup>(this LookupDto lookup)
+        where TLookup : BaseLookup, new()
     {
-        return new BaseLookup
+        return new TLookup
         {
             Id = lookup.Id,
             Text = lookup.Text,
