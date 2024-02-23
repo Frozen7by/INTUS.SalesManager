@@ -1,9 +1,9 @@
 using INTUS.SalesManager.Api.Web.Components;
 using INTUS.SalesManager.Application;
+using INTUS.SalesManager.Domain.Services.Lookups;
 using INTUS.SalesManager.Domain.Services.Orders;
 using INTUS.SalesManager.Infrastructure.Common;
 using INTUS.SalesManager.Infrastructure.DataAccess;
-
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +23,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddMediatR(it => it.RegisterServicesFromAssemblies(Module.Assembly));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped(typeof(IOrderService), typeof(OrderService));
+builder.Services.AddScoped(typeof(ILookupService<>), typeof(LookupService<>));
 
 var baseAddress = builder.Configuration.GetValue<string>("ApplicationUrl")!;
 builder.Services.AddScoped(_ => new HttpClient

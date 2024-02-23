@@ -1,0 +1,64 @@
+﻿@rendermode InteractiveWebAssembly
+@using INTUS.SalesManager.Common.Models
+@inject HttpClient HttpClient
+
+<h4>@(isEdit ? "Edit" : "Add") Sub Element</h4>
+<div>
+    <EditForm Model="@updatedElement">
+        <label>Element:
+            <input type="number" @bind-value="updatedElement.Index" />
+        </label>
+        <label>Type:
+        <select @bind="updatedElement.ElementType.Id">
+            @foreach (var type in elementTypes)
+            {
+                <option value="@type.Id">@type.Text</option>
+            }
+            </select>
+        </label>
+        <label>Width:
+            <input type="number" @bind-value="updatedElement.Width" />
+        </label>
+        <label>Height:
+            <input type="number" @bind-value="updatedElement.Height" />
+        </label>
+        <button class="btn btn-primary" type="button" @onclick="() => SubmitForm()">Submit</button>
+    </EditForm>
+</div>
+
+@code {
+    [CascadingParameter]
+    public ModalWrapperComponent ModalWrapper { get; set; }
+
+    [Parameter]
+    public long WindowId { get; set; }
+
+    [Parameter]
+    public SubElementDto SubElement { get; set; }
+
+    private bool isEdit;
+    private bool loading = false;
+    private SubElementDto updatedElement;
+    private List<LookupDto> elementTypes = Array.Empty<LookupDto>().ToList();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        isEdit = SubElement != null;
+        updatedElement = SubElement ?? new SubElementDto() { ElementType = new() };
+        elementTypes = await HttpClient.GetFromJsonAsync<List<LookupDto>>("api/v1/lookups/elementTypes");
+    }
+
+    public async Task SubmitForm()
+    {
+        loading = true;
+        var result = isEdit
+            ? await HttpClient.PutAsJsonAsync($"/api/v1/windows/{WindowId}/elemnts", updatedElement)
+            : await HttpClient.PostAsJsonAsync($"/api/v1/windows/{WindowId}/elemnts", updatedElement);
+        loading = false;
+
+        if (result.IsSuccessStatusCode)
+        {
+            ModalWrapper.CloseModal();
+        }
+    }
+}

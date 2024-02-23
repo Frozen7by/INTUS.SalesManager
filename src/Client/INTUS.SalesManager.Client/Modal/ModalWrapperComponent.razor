@@ -1,0 +1,35 @@
+﻿<CascadingValue Value="this">
+    <div style="opacity: @(showModal ? "0.5" : "1")">
+        @ChildContent
+    </div>
+    <div class="intus-modal" style="@("display: " + (showModal ? $"block; {modalPosition}": "none"))">
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-danger" @onclick="() => CloseModal()">Close</button>
+        </div>
+        <DynamicComponent Type="componentType" Parameters="componentParameters"/>
+    </div>
+</CascadingValue>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private bool showModal;
+    private string modalPosition = "position: absolute; top: 320px; left: 640px;";
+    private Type componentType = typeof(EditSubElementComponent);
+    private Dictionary<string, object> componentParameters;
+
+    public void ShowModal(Type componentType, Dictionary<string, object> componentParameters)
+    {
+        this.componentType = componentType;
+        this.componentParameters = componentParameters;
+        showModal = true;
+        StateHasChanged();
+    }
+
+    public void CloseModal()
+    {
+        showModal = false;
+        StateHasChanged();
+    }
+}
