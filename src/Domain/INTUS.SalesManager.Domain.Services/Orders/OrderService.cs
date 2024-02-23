@@ -27,6 +27,41 @@ public class OrderService : IOrderService
             }).ToListAsync(cancellationToken);
     }
 
+    public async Task<long> AddOrder(OrderDto orderDto, CancellationToken cancellationToken)
+    {
+        var order = new Order
+        {
+            Name = orderDto.Name,
+            StateId = orderDto.State.Id,
+        };
+
+        _orderRepository.Add(order);
+        await _orderRepository.SaveChanges(cancellationToken);
+
+        return order.Id;
+    }
+
+    public async Task UpdateOrder(OrderDto orderDto, CancellationToken cancellationToken)
+    {
+        var order = await _orderRepository.GetQueryable()
+            .SingleAsync(it => it.Id == orderDto.Id, cancellationToken);
+
+        order.Name = orderDto.Name;
+        order.StateId = orderDto.State.Id;
+
+        await _orderRepository.SaveChanges(cancellationToken);
+    }
+
+    public async Task RemoveOrder(OrderDto orderDto, CancellationToken cancellationToken)
+    {
+        var order = await _orderRepository.GetQueryable()
+            .SingleAsync(it => it.Id == orderDto.Id, cancellationToken);
+
+        _orderRepository.Remove(order);
+
+        await _orderRepository.SaveChanges(cancellationToken);
+    }
+
     public Task<OrderDto> GetOrder(long id, CancellationToken cancellationToken)
     {
         return _orderRepository.GetQueryable()

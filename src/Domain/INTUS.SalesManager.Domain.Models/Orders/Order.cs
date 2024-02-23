@@ -13,7 +13,7 @@ public class Order : BaseEntity
 
     public long StateId { get; set; }
 
-    public required State State { get; set; }
+    public State State { get; set; }
 
     public List<Window> Windows { get; set; } = [];
 }

@@ -13,4 +13,13 @@ public static class LookupExtensions
             Text = lookup.Text,
         };
     }
+
+    public static BaseLookup ToBaseLookup(this LookupDto lookup)
+    {
+        return new BaseLookup
+        {
+            Id = lookup.Id,
+            Text = lookup.Text,
+        };
+    }
 }

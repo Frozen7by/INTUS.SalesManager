@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using INTUS.SalesManager.Common.Models;
+﻿using INTUS.SalesManager.Common.Models;
 using INTUS.SalesManager.Domain.Services.Orders;
 using MediatR;
 
