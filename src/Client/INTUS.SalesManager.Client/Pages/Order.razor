@@ -12,7 +12,7 @@
 else
 {
     <h3>Order: @order.Name, @order.State.Text</h3>
-    @foreach (var window in order.Windows)
+@*     @foreach (var window in order.Windows)
     {
         <p>Window: @window.Name, quantity of windows: @window.Quantity</p>
         <table class="table">
@@ -39,7 +39,7 @@ else
             </tbody>
         </table>
         <p>Total sub elements: @window.TotalSubElements</p>
-    }
+    } *@
 }
 
 @code {
