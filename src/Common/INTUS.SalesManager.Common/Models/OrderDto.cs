@@ -7,6 +7,4 @@ public class OrderDto
     public string Name { get; set; }
 
     public LookupDto State { get; set; }
-
-    public List<WindowDto> Windows { get; set; }
 }

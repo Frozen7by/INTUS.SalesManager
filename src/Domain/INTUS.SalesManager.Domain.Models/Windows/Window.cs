@@ -10,7 +10,7 @@ public class Window : BaseEntity
 {
     public long OrderId { get; set; }
 
-    public required Order Order { get; set; }
+    public Order Order { get; set; }
 
     [MaxLength(FieldConstants.MaxFieldLength)]
     public required string Name { get; set; }

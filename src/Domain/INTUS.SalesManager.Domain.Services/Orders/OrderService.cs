@@ -71,22 +71,6 @@ public class OrderService : IOrderService
                 Id = it.Id,
                 Name = it.Name,
                 State = it.State.ToLookupDto(),
-                Windows = it.Windows.Select(
-                    w => new WindowDto
-                    {
-                        Id = w.Id,
-                        Name = w.Name,
-                        Quantity = w.Quantity,
-                        SubElements = w.SubElements.Select(
-                            se => new SubElementDto
-                            {
-                                Id = se.Id,
-                                ElementType = se.ElementType.ToLookupDto(),
-                                Index = se.Index,
-                                Width = se.Width,
-                                Height = se.Height,
-                            }).ToList(),
-                    }).ToList()
             })
             .SingleAsync(cancellationToken);
     }
