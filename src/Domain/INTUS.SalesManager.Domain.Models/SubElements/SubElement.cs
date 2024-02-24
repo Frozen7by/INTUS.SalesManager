@@ -8,11 +8,11 @@ public class SubElement : BaseEntity
 {
     public long WindowId { get; set; }
 
-    public required Window Window { get; set; }
+    public Window Window { get; set; }
 
     public long ElementTypeId { get; set; }
 
-    public required ElementType ElementType { get; set; }
+    public ElementType ElementType { get; set; }
 
     public int Index { get; set; }
     

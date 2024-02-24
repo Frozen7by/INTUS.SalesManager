@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace INTUS.SalesManager.Domain.Services.Windows;
 
-public class WindowsService : IWindowsService
+public class WindowService : IWindowService
 {
     private readonly IRepository<Window> _windowRepository;
 
-    public WindowsService(IRepository<Window> windowRepository)
+    public WindowService(IRepository<Window> windowRepository)
     {
         _windowRepository = windowRepository;
     }
@@ -17,6 +17,7 @@ public class WindowsService : IWindowsService
     public Task<List<WindowListDto>> GetWindows(long orderId, CancellationToken cancellationToken)
     {
         return _windowRepository.GetQueryable()
+            .Where(it => it.OrderId == orderId)
             .Select(it => new WindowListDto
             {
                 Id = it.Id,

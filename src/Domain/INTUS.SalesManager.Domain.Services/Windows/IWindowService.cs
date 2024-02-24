@@ -2,7 +2,7 @@
 
 namespace INTUS.SalesManager.Domain.Services.Windows;
 
-public interface IWindowsService
+public interface IWindowService
 {
     Task<long> AddWindow(WindowDto windowDto, CancellationToken cancellationToken);
 
