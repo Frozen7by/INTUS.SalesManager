@@ -1,7 +1,7 @@
 using Bogus;
 using Moq;
 
-namespace INTUS.SalesManager.Domain.Services.Tests;
+namespace INTUS.SalesManager.Common.Tests;
 
 public class BaseTest : IDisposable
 {
