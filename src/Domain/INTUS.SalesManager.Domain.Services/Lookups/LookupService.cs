@@ -53,4 +53,11 @@ public class LookupService<TEntity> : ILookupService<TEntity>
 
         await _repository.SaveChanges(cancellationToken);
     }
+
+    public Task<LookupDto?> Get(long id, CancellationToken cancellationToken)
+    {
+        return _repository.GetQueryable()
+            .Select(it => it.ToLookupDto())
+            .SingleOrDefaultAsync(it => it.Id == id, cancellationToken);
+    }
 }

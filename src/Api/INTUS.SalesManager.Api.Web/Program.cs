@@ -5,7 +5,10 @@ using INTUS.SalesManager.Domain.Services.Lookups;
 using INTUS.SalesManager.Domain.Services.Orders;
 using INTUS.SalesManager.Infrastructure.Common;
 using INTUS.SalesManager.Infrastructure.DataAccess;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using INTUS.SalesManager.Domain.Services.Windows;
+using INTUS.SalesManager.Domain.Services.SubElements;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +23,11 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.CustomSchemaIds(type => type.ToString());
+});
+builder.Services.AddValidatorsFromAssembly(Module.Assembly);
 
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
@@ -28,6 +35,8 @@ builder.Services.AddRazorComponents()
 builder.Services.AddMediatR(it => it.RegisterServicesFromAssemblies(Module.Assembly));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped(typeof(IOrderService), typeof(OrderService));
+builder.Services.AddScoped(typeof(IWindowService), typeof(WindowService));
+builder.Services.AddScoped(typeof(ISubElementService), typeof(SubElementService));
 builder.Services.AddScoped(typeof(ILookupService<>), typeof(LookupService<>));
 
 builder.Services.AddTransient<ExceptionHandlingMiddleware>();

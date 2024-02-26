@@ -10,6 +10,8 @@ public interface ISubElementService
 
     Task<List<SubElementDto>> GetSubElements(long windowId, CancellationToken cancellationToken);
 
+    Task<bool> IsElementTypeUsed(long elementTypeId, CancellationToken cancellationToken);
+
     Task RemoveSubElement(SubElementDto subElementDto, CancellationToken cancellationToken);
 
     Task UpdateSubElement(SubElementDto subElementDto, CancellationToken cancellationToken);

@@ -82,4 +82,10 @@ public class SubElementService : ISubElementService
             })
             .SingleAsync(cancellationToken);
     }
+
+    public Task<bool> IsElementTypeUsed(long elementTypeId, CancellationToken cancellationToken)
+    {
+        return _subElementRepository.GetQueryable()
+            .AnyAsync(it => it.ElementTypeId == elementTypeId, cancellationToken);
+    }
 }

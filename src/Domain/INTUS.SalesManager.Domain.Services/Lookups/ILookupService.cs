@@ -8,6 +8,8 @@ public interface ILookupService<TEntity>
 {
     Task Add(LookupDto lookupDto, CancellationToken cancellationToken);
 
+    Task<LookupDto?> Get(long id, CancellationToken cancellationToken);
+
     Task<List<LookupDto>> GetAll(CancellationToken cancellationToken);
 
     Task Remove(LookupDto lookupDto, CancellationToken cancellationToken);

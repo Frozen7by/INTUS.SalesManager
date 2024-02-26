@@ -27,4 +27,22 @@ public class OrdersController : Controller
     {
         return _mediator.Send(request);
     }
+
+    [HttpPost]
+    public Task AddOrder([FromBody] AddOrder.Request request)
+    {
+        return _mediator.Send(request);
+    }
+
+    [HttpPut]
+    public Task UpdateOrder([FromBody] UpdateOrder.Request request)
+    {
+        return _mediator.Send(request);
+    }
+
+    [HttpDelete("{id}")]
+    public Task RemoveOrder([FromRoute] RemoveOrder.Request request)
+    {
+        return _mediator.Send(request);
+    }
 }
