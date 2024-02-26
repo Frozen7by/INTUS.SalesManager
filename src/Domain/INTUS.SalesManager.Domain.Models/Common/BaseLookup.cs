@@ -8,5 +8,5 @@ public class BaseLookup : IHasId
     public long Id { get; set; }
 
     [MaxLength(FieldConstants.MaxLookupTextLength)]
-    public required string Text { get; set; }
+    public string Text { get; set; }
 }

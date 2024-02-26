@@ -27,7 +27,6 @@ public class LookupService<TEntity> : ILookupService<TEntity>
     {
         TEntity lookup = new()
         {
-            Id = lookupDto.Id,
             Text = lookupDto.Text,
         };
 
