@@ -25,7 +25,7 @@ public class EntityChangesInterceptor : SaveChangesInterceptor
 
     private void OnSaveChanges(DbContextEventData eventData)
     {
-        foreach (var entry in eventData.Context.ChangeTracker.Entries())
+        foreach (var entry in eventData?.Context?.ChangeTracker?.Entries() ?? Array.Empty<EntityEntry>())
         {
             switch (entry.State)
             {
