@@ -21,7 +21,7 @@ public class GetSubElementsTests : BaseTest
         // Arrange
         var request = new GetSubElements.Request();
         var hanlder = new GetSubElements.Handler(_mockService.Object);
-        _mockService.Setup(it => it.GetSubElements(request.WindowId, default))
+        _mockService.Setup(it => it.GetSubElements(default))
             .ReturnsAsync(Array.Empty<SubElementDto>().ToList());
 
         // Act

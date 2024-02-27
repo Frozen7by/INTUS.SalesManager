@@ -21,7 +21,7 @@ public class GetWindowsTests : BaseTest
         // Arrange
         var request = new GetWindows.Request();
         var hanlder = new GetWindows.Handler(_mockService.Object);
-        _mockService.Setup(it => it.GetWindows(request.OrderId, default))
+        _mockService.Setup(it => it.GetWindows(default))
             .ReturnsAsync(Array.Empty<WindowListDto>().ToList());
 
         // Act

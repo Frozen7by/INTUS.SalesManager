@@ -8,7 +8,7 @@ public interface ISubElementService
 
     Task<SubElementDto> GetSubElement(long id, CancellationToken cancellationToken);
 
-    Task<List<SubElementDto>> GetSubElements(long windowId, CancellationToken cancellationToken);
+    Task<List<SubElementDto>> GetSubElements(CancellationToken cancellationToken);
 
     Task<bool> IsElementTypeUsed(long elementTypeId, CancellationToken cancellationToken);
 

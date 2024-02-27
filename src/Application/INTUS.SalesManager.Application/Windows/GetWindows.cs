@@ -8,7 +8,6 @@ public static class GetWindows
 {
     public class Request : IRequest<List<WindowListDto>>
     {
-        public long OrderId { get; set; }
     }
 
     public class Handler : IRequestHandler<Request, List<WindowListDto>>
@@ -22,7 +21,7 @@ public static class GetWindows
 
         public Task<List<WindowListDto>> Handle(Request request, CancellationToken cancellationToken)
         {
-            return _service.GetWindows(request.OrderId, cancellationToken);
+            return _service.GetWindows(cancellationToken);
         }
     }
 }

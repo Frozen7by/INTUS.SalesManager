@@ -1,0 +1,44 @@
+@page "/windows"
+
+<PageTitle>Windows</PageTitle>
+<RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="Windows" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenRow>
+      <RadzenColumn SizeMD=12>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="false" FilterMode="FilterMode.Advanced" AllowPaging="false" AllowSorting="false" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@windows" LoadData="@Grid0LoadData" Count="@count" TItem="WindowListDto" RowSelect="@EditRow">
+            <Columns>
+                <RadzenDataGridColumn TItem="WindowListDto" Property="Id" Title="Id">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WindowListDto" Property="OrderName" Title="Order">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WindowListDto" Property="Name" Title="Name">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WindowListDto" Property="Quantity" Title="Quantity Of Windows">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WindowListDto" Property="TotalSubElements" Title="Total Sub Elements">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WindowListDto" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                    <Template Context="window">
+
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
+                            Shade="Shade.Lighter" Variant="Variant.Flat"
+                            Click=@(args => GridDeleteButtonClick(args, window)) @onclick:stopPropagation="true" />
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+
+        </RadzenDataGrid>
+
+    </RadzenColumn>
+  </RadzenRow>
+</RadzenStack>

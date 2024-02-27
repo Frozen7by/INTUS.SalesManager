@@ -8,7 +8,7 @@ public interface IWindowService
 
     Task<WindowDto> GetWindow(long id, CancellationToken cancellationToken);
 
-    Task<List<WindowListDto>> GetWindows(long orderId, CancellationToken cancellationToken);
+    Task<List<WindowListDto>> GetWindows(CancellationToken cancellationToken);
 
     Task RemoveWindow(WindowDto windowDto, CancellationToken cancellationToken);
 

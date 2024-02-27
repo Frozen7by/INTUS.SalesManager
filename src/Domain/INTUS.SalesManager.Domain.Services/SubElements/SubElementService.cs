@@ -15,10 +15,9 @@ public class SubElementService : ISubElementService
         _subElementRepository = subElementRepository;
     }
 
-    public Task<List<SubElementDto>> GetSubElements(long windowId, CancellationToken cancellationToken)
+    public Task<List<SubElementDto>> GetSubElements(CancellationToken cancellationToken)
     {
         return _subElementRepository.GetQueryable()
-            .Where(it => it.WindowId == windowId)
             .Select(it => new SubElementDto
             {
                 Id = it.Id,
@@ -26,6 +25,8 @@ public class SubElementService : ISubElementService
                 ElementType = it.ElementType.ToLookupDto(),
                 Width = it.Width,
                 Height = it.Height,
+                WindowId = it.WindowId,
+                WindowName = it.Window.Name,
             }).ToListAsync(cancellationToken);
     }
 
@@ -37,6 +38,7 @@ public class SubElementService : ISubElementService
             ElementTypeId = subElementDto.ElementType.Id,
             Width = subElementDto.Width,
             Height = subElementDto.Height,
+            WindowId = subElementDto.WindowId,
         };
 
         _subElementRepository.Add(subElement);
@@ -79,6 +81,7 @@ public class SubElementService : ISubElementService
                 ElementType = it.ElementType.ToLookupDto(),
                 Width = it.Width,
                 Height = it.Height,
+                WindowId = it.WindowId,
             })
             .SingleAsync(cancellationToken);
     }

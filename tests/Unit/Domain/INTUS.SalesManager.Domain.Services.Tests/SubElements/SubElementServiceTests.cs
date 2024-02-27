@@ -37,7 +37,6 @@ public class SubElementServiceTests : BaseTest
         mockRepository.Setup(it => it.GetQueryable(false))
             .Returns(subElements.BuildMock());
         var expected = subElements
-            .Where(it => it.WindowId == windowId)
             .Select(it => new SubElementDto
             {
                 Id = it.Id,
@@ -45,11 +44,12 @@ public class SubElementServiceTests : BaseTest
                 ElementType = it.ElementType.ToLookupDto(),
                 Width = it.Width,
                 Height = it.Height,
+                WindowId = it.WindowId,
+                WindowName = it.Window.Name,
             }).ToList();
 
         // Act
         var result = await service.GetSubElements(
-            windowId,
             cancellationToken);
 
         // Assert

@@ -14,14 +14,14 @@ public class WindowService : IWindowService
         _windowRepository = windowRepository;
     }
 
-    public Task<List<WindowListDto>> GetWindows(long orderId, CancellationToken cancellationToken)
+    public Task<List<WindowListDto>> GetWindows(CancellationToken cancellationToken)
     {
         return _windowRepository.GetQueryable()
-            .Where(it => it.OrderId == orderId)
             .Select(it => new WindowListDto
             {
                 Id = it.Id,
                 Name = it.Name,
+                OrderName = it.Order.Name,
                 Quantity = it.Quantity,
                 TotalSubElements = it.SubElements.Count,
             }).ToListAsync(cancellationToken);
@@ -33,6 +33,7 @@ public class WindowService : IWindowService
         {
             Name = windowDto.Name,
             Quantity = windowDto.Quantity,
+            OrderId = windowDto.OrderId,
         };
 
         _windowRepository.Add(window);
@@ -71,6 +72,7 @@ public class WindowService : IWindowService
                 Id = it.Id,
                 Name = it.Name,
                 Quantity = it.Quantity,
+                OrderId = it.OrderId,
             })
             .SingleAsync(cancellationToken);
     }

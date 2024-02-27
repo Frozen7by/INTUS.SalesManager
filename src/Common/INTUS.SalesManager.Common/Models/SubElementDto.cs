@@ -11,5 +11,9 @@ public class SubElementDto
     public int Width { get; set; }
 
     public int Height { get; set; }
+
+    public long WindowId { get; set; }
+
+    public string WindowName { get; set; }
 }
 

@@ -1,0 +1,46 @@
+@page "/sub-elements"
+
+<PageTitle>Sub Elements</PageTitle>
+<RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="Sub Elements" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenRow>
+      <RadzenColumn SizeMD=12>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="false" FilterMode="FilterMode.Advanced" AllowPaging="false" AllowSorting="false" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@subElements" LoadData="@Grid0LoadData" Count="@count" TItem="SubElementDto" RowSelect="@EditRow">
+            <Columns>
+                <RadzenDataGridColumn TItem="SubElementDto" Property="Id" Title="Id">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="SubElementDto" Property="WindowName" Title="Window">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="SubElementDto" Property="ElementType.Text" Title="Element Type">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="SubElementDto" Property="Index" Title="Element">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="SubElementDto" Property="Width" Title="Width">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="SubElementDto" Property="Height" Title="Height">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="SubElementDto" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                    <Template Context="subElement">
+
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
+                            Shade="Shade.Lighter" Variant="Variant.Flat"
+                            Click=@(args => GridDeleteButtonClick(args, subElement)) @onclick:stopPropagation="true" />
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+
+        </RadzenDataGrid>
+
+    </RadzenColumn>
+  </RadzenRow>
+</RadzenStack>

@@ -9,6 +9,7 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using INTUS.SalesManager.Domain.Services.Windows;
 using INTUS.SalesManager.Domain.Services.SubElements;
+using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddControllers();
+builder.Services.AddRadzenComponents();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -71,7 +73,6 @@ app.UseSwaggerUI();
 
 app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
-    .AddInteractiveServerRenderMode()
     .AddAdditionalAssemblies(typeof(INTUS.SalesManager.Client._Imports).Assembly);
 
 app.Run();

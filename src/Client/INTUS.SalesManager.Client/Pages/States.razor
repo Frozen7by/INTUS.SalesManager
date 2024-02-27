@@ -1,91 +1,38 @@
-﻿@page "/states"
-@rendermode InteractiveAuto
-@using INTUS.SalesManager.Common.Models
+@page "/states"
 
-<h3>States</h3>
+<PageTitle>States</PageTitle>
+<RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="States" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenRow>
+      <RadzenColumn SizeMD=12>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="false" FilterMode="FilterMode.Advanced" AllowPaging="false" AllowSorting="false" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@states" LoadData="@Grid0LoadData" Count="@count" TItem="LookupDto" RowSelect="@EditRow">
+            <Columns>
+                <RadzenDataGridColumn TItem="LookupDto" Property="Id" Title="Id">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="LookupDto" Property="Text" Title="Text">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="LookupDto" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                    <Template Context="state">
 
-@if (states == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <div class="d-flex flex-row-reverse">
-        <button class="btn @(modifyMode ? "btn-secondary" : "btn-primary")" @onclick="() => SetModifyMode()">Modify</button>
-    </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Text</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var state in states)
-            {
-                <tr>
-                    <td>@state.Id</td>
-                    <td>@state.Text</td>
-                    <td><button class="btn btn-danger" @onclick="() => Delete(state)">Delete</button></td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    @if (modifyMode)
-    {
-        <div class="form-group">
-            <label for="id">Id</label>
-            <input type="number" class="form-control" id="id" aria-describedby="Help" placeholder="Enter id" @bind-value=modifyModel.Id>
-            <small id="idHelp" class="form-text text-muted">Put 0 for adding and existing Id for updating.</small>
-        </div>
-        <div class="form-group">
-            <label for="text">Text</label>
-            <input type="text" class="form-control" id="text" placeholder="State" @bind-value=modifyModel.Text>
-        </div>
-        <button type="button" class="btn btn-primary" @onclick="() => Submit()">Submit</button>
-    }
-}
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
+                            Shade="Shade.Lighter" Variant="Variant.Flat"
+                            Click=@(args => GridDeleteButtonClick(args, state)) @onclick:stopPropagation="true" />
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
 
-@code {
-    private List<LookupDto> states;
-    private bool modifyMode = false;
-    private LookupDto modifyModel;
+        </RadzenDataGrid>
 
-    protected override async Task OnInitializedAsync()
-    {
-        states = await HttpClient.GetFromJsonAsync<List<LookupDto>>("/api/v1/lookups/states");
-    }
-
-    private void SetModifyMode()
-    {
-        modifyMode = true;
-        modifyModel = new();
-        StateHasChanged();
-    }
-
-    private async Task Submit()
-    {
-        var response = modifyModel.Id == default
-            ? await HttpClient.PostAsJsonAsync("/api/v1/lookups/states", modifyModel)
-            : await HttpClient.PutAsJsonAsync("/api/v1/lookups/states", modifyModel);
-
-        if (response.IsSuccessStatusCode)
-        {
-            modifyMode = false;
-            states = await HttpClient.GetFromJsonAsync<List<LookupDto>>("/api/v1/lookups/states");
-            StateHasChanged();
-        }
-    }
-
-    private async Task Delete(LookupDto dto)
-    {
-        var response = await HttpClient.DeleteAsync($"/api/v1/lookups/states/{dto.Id}");
-
-        if (response.IsSuccessStatusCode)
-        {
-            states = await HttpClient.GetFromJsonAsync<List<LookupDto>>("/api/v1/lookups/states");
-            StateHasChanged();
-        }
-    }
-}
+    </RadzenColumn>
+  </RadzenRow>
+</RadzenStack>

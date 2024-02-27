@@ -8,7 +8,6 @@ public static class GetSubElements
 {
     public class Request : IRequest<List<SubElementDto>>
     {
-        public long WindowId { get; set; }
     }
 
     public class Handler : IRequestHandler<Request, List<SubElementDto>>
@@ -22,7 +21,7 @@ public static class GetSubElements
 
         public Task<List<SubElementDto>> Handle(Request request, CancellationToken cancellationToken)
         {
-            return _service.GetSubElements(request.WindowId, cancellationToken);
+            return _service.GetSubElements(cancellationToken);
         }
     }
 }

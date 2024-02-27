@@ -63,4 +63,16 @@ public class LookupsController : Controller
     {
         return _mediator.Send(request);
     }
+
+    [HttpGet("elementTypes/{id}")]
+    public Task GetType([FromRoute] GetType.Request request)
+    {
+        return _mediator.Send(request);
+    }
+
+    [HttpGet("states/{id}")]
+    public Task GetState([FromRoute] GetState.Request request)
+    {
+        return _mediator.Send(request);
+    }
 }

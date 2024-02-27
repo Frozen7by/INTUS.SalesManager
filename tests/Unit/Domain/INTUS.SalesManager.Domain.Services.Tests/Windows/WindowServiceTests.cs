@@ -35,18 +35,17 @@ public class WindowServiceTests : BaseTest
         mockRepository.Setup(it => it.GetQueryable(false))
             .Returns(windows.BuildMock());
         var expected = windows
-            .Where(it => it.OrderId == orderId)
             .Select(it => new WindowListDto
         {
             Id = it.Id,
             Name = it.Name,
             Quantity = it.Quantity,
             TotalSubElements = it.SubElements.Count,
+            OrderName = it.Order.Name,
         }).ToList();
 
         // Act
         var result = await service.GetWindows(
-            orderId,
             cancellationToken);
 
         // Assert
