@@ -1,8 +1,53 @@
+using INTUS.SalesManager.Api.Web.Components;
+using INTUS.SalesManager.Api.Web.Middleware;
+using INTUS.SalesManager.Application;
+using INTUS.SalesManager.Domain.Services.Lookups;
+using INTUS.SalesManager.Domain.Services.Orders;
+using INTUS.SalesManager.Infrastructure.Common;
+using INTUS.SalesManager.Infrastructure.DataAccess;
+using FluentValidation;
+using Microsoft.EntityFrameworkCore;
+using INTUS.SalesManager.Domain.Services.Windows;
+using INTUS.SalesManager.Domain.Services.SubElements;
+using Radzen;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<DbContext, SalesManagerDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
+builder.Services.AddRazorComponents()
+    .AddInteractiveWebAssemblyComponents()
+    .AddInteractiveServerComponents();
+
+builder.Services.AddControllers();
+builder.Services.AddRadzenComponents();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.CustomSchemaIds(type => type.ToString());
+});
+builder.Services.AddValidatorsFromAssembly(Module.Assembly);
+
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddMediatR(it => it.RegisterServicesFromAssemblies(Module.Assembly));
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped(typeof(IOrderService), typeof(OrderService));
+builder.Services.AddScoped(typeof(IWindowService), typeof(WindowService));
+builder.Services.AddScoped(typeof(ISubElementService), typeof(SubElementService));
+builder.Services.AddScoped(typeof(ILookupService<>), typeof(LookupService<>));
+
+builder.Services.AddTransient<ExceptionHandlingMiddleware>();
+
+var baseAddress = builder.Configuration.GetValue<string>("ApplicationUrl")!;
+builder.Services.AddScoped(_ => new HttpClient
+{
+    BaseAddress = new Uri(baseAddress)
+});
 
 var app = builder.Build();
 
@@ -22,5 +67,12 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+app.MapControllers();
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.MapRazorComponents<App>()
+    .AddInteractiveWebAssemblyRenderMode()
+    .AddAdditionalAssemblies(typeof(INTUS.SalesManager.Client._Imports).Assembly);
 
 app.Run();

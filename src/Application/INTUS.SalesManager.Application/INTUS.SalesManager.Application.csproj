@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.9.0" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\INTUS.SalesManager.Common\INTUS.SalesManager.Common.csproj" />
+    <ProjectReference Include="..\..\Domain\INTUS.SalesManager.Domain.Services\INTUS.SalesManager.Domain.Services.csproj" />
+  </ItemGroup>
+
+</Project>
